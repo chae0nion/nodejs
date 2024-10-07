@@ -1,15 +1,43 @@
 "use strict";
+const output = {
+    hello : (req, res)=>{
+        res.render("home/index"); 
+    },
+    
+    login : (req, res)=>{
+        res.render("home/login");
+    },
+    
+}; //얘네는 객체
 
-const hello = (req, res)=>{
-    res.render("home/index"); 
-    };
+const users = {
+    id:["woorimit", "안채원", "chaeoni"],
+    psword: ["1234", "0000", "12345"],
+};
 
-const login = (req, res)=>{
-    res.render("home/login");
-    };
+const process = {
+    login: (req,res) => {
+        const id = req.body.id,
+        psword = req.body.psword;
+
+        if (users.id.includes(id)){
+            const idx = users.id.indexOf(id);
+            if(users.psword[idx]===psword){
+                return res.json({
+                    success:true,
+             });
+
+            }
+        }
+        return res.json({
+            success: false,
+            msg: "login is failed."
+        })
+    },
+}
+
 
 module.exports={
-    hello,
-    login
-}; // hello, login이 object인데 object는 key: value로 이루어짐// key만 명시하면 key: key(랑 같은 value) 형태로 저장
-//rend() 함수는 ejs파일만 전송함/ index.js는 ejs파일이 아니므로 건너뛰고 views 밑에 home가서 ejs파일을 찾은거죠
+    output, 
+    process,
+}; 

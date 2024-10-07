@@ -1,4 +1,5 @@
 "use strict";
+//frontend
 
 const id = document.querySelector("#id"),
  psword = document.querySelector("#psword"),
@@ -12,10 +13,13 @@ function login(){
         psword: psword.value,
 
     };
-    console.log(req);
-    console.log(JSON.stringify(req));
-    // fetch("/login",{
-    //     body: JSON.stringify(req)
-    // })
-    
-}
+   
+    fetch("/login",{
+        method: "POST",
+        headers:{
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(req)
+    }).then((res) => res.json())
+      .then(console.log);    
+}//promise 형태로 반환
