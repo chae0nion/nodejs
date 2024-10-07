@@ -1,4 +1,7 @@
 "use strict";
+
+const UserStorage = require("../../models/UserStorage");
+
 const output = {
     hello : (req, res)=>{
         res.render("home/index"); 
@@ -10,31 +13,31 @@ const output = {
     
 }; //얘네는 객체
 
-const users = {
-    id:["woorimit", "안채원", "chaeoni"],
-    psword: ["1234", "0000", "12345"],
-};
+
 
 const process = {
     login: (req,res) => {
         const id = req.body.id,
-        psword = req.body.psword;
+         psword = req.body.psword;
+         
+        const users = UserStorage.getUsers("id", "psword");//UserStorage에서 static users해주면 바로 users접근가능
+
+        const response={};
 
         if (users.id.includes(id)){
             const idx = users.id.indexOf(id);
             if(users.psword[idx]===psword){
-                return res.json({
-                    success:true,
-             });
-
+                response.success = true;
+                return res.json(response);
             }
+
         }
-        return res.json({
-            success: false,
-            msg: "login is failed."
-        })
+        response.success = false;
+        response.msg = "로그인에 실패했습니다."
+        return res.json(response);
     },
-}
+};   
+        
 
 
 module.exports={

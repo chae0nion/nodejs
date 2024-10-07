@@ -24,11 +24,11 @@ function login(){
       .then((res)=>{
         if(res.success){
             location.href ="/";
-        }else{
+        } else { 
             alert(res.msg);
         }
       })
       .catch((err)=>{
         console.error(new Error("login중 error 발생"));
-      })    
+      });    
 }//promise 형태로 반환
