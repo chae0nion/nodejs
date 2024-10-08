@@ -2,7 +2,7 @@
 //frontend
 
 const id = document.querySelector("#id"),
- name = document.querySelector("#name"),
+ realname = document.querySelector("#realname"),
  psword = document.querySelector("#psword"),
  confirmPsword = document.querySelector("#confirm-psword"),
  registerBtn = document.querySelector("#button");
@@ -11,12 +11,12 @@ registerBtn.addEventListener("click", register);
 
 function register(){
     if(!id.value) return alert("아이디 입력해주세요.");
-    if(psword !== confirmPsword){
+    if(psword.value !== confirmPsword.value){
         return alert("비밀번호가 일치하지 않습니다.");//여기에서 처리 서버한테 confirmpsword는 보낼 필요x
     }
     const req = {
         id : id.value,
-        name: name.vlaue,
+        realname: realname.value,
         psword: psword.value,
         
 

@@ -8,7 +8,7 @@ class User{
     }
 
     async login(){
-        
+
         const client = this.body;
 
         const {id, psword} = await UserStorage.getUserInfo(client.id);
@@ -24,12 +24,19 @@ class User{
         
     }
 
-    register(){
-        const client = this.body;
-        const response = UserStorage.save(client); //저장
-        return response;
-    }
+    async register(){
 
+        const client = this.body;
+
+        try{
+            const response = await UserStorage.save(client); //저장
+            return response;
+        
+        }catch(err){
+            return {success: false, msg: err}
+        }
+
+    }
 }
 
 module.exports=User;
